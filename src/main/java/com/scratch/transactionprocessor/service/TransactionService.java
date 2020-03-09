@@ -29,7 +29,6 @@ public class TransactionService implements ITransactionService {
 	public List<Transaction> executeTransactions(List<Transaction> transactions) {
 		
 		List<Transaction> failedTransactions = new ArrayList<Transaction>();
-		
 		transactions.forEach(transaction -> {
 			logger.info("Executing transaction: {} ", transaction.getCmd().toString());
 			try {

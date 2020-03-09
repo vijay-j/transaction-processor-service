@@ -27,6 +27,11 @@ public class AccountsService implements IAccountsService {
 
 	@Override
 	public double withdraw(String accountId, double amount) throws TransactionException {
+		
+		if (amount < 0) {
+			throw new TransactionException(ErrorCode.INVALID_TRANSACTION);
+		}
+		
 		// create account if not exists
 		if (!accountsStore.containsKey(accountId)) {
 			createAccount(accountId);
@@ -51,6 +56,10 @@ public class AccountsService implements IAccountsService {
 	@Override
 	public void deposit(String accountId, double amount) throws TransactionException {
 		// create account if not exists
+		if (amount < 0) {
+			throw new TransactionException(ErrorCode.INVALID_TRANSACTION);
+		}
+		
 		if (!accountsStore.containsKey(accountId)) {
 			createAccount(accountId);
 		}
